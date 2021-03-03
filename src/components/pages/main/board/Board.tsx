@@ -6,9 +6,9 @@ import { Task } from "../task/Task";
 import { BoardRequest } from "../../../requests/BoardRequest";
 import { TaskRequest } from "../../../requests/TaskRequest";
 import { DataContext } from "../../../../Guard";
-// import { BoardModal } from "../../../../components/pages/modal/BoardModal";
-import { BoardMenu } from "../../../pages/main/boardMenu/BoardMenu";
-import "./popup.css";
+import { BoardModal } from "../../../../components/pages/modal/BoardModal";
+// import { BoardMenu } from "../../../pages/main/boardMenu/BoardMenu";
+// import "./popup.css";
 
 interface Props {
   board: BoardType;
@@ -21,8 +21,8 @@ export const Board: React.FC<Props> = (props) => {
   const [boardName, setBoardName] = useState(props.board.name);
   const { data, dispatch } = useContext(DataContext);
   const [taskName, setTaskName] = useState("");
-  const [isShown, setIsShown] = useState(false);
-  // const _ref = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  // const [isShown, setIsShown] = useState(false);
 
   const requestTaskData: TaskType = {
     name: taskName,
@@ -33,6 +33,7 @@ export const Board: React.FC<Props> = (props) => {
     id: props.board.id,
     name: boardName,
   };
+
   const onClickSubmit = async () => {
     try {
       const tasks: TaskType[] = await TaskRequest("createTasks", {
@@ -43,6 +44,10 @@ export const Board: React.FC<Props> = (props) => {
     } catch (err) {
       alert("通信に失敗しました。");
     }
+  };
+
+  const handleOnBoardModalClose = () => {
+    setIsOpen(!isOpen);
   };
 
   const handleOnBoardOpen = () => {
@@ -66,9 +71,9 @@ export const Board: React.FC<Props> = (props) => {
     }
   };
 
-  const handleOnBoardMenu = () => {
-    setIsShown(!isShown);
-  };
+  // const handleOnBoardMenu = () => {
+  //   setIsShown(!isShown);
+  // };
 
   const clickOnTaskAdd = () => {
     setTaskAddIsOpen(!taskAddIsOpen);
@@ -84,19 +89,15 @@ export const Board: React.FC<Props> = (props) => {
           >
             {props.board.name}
           </div>
-          <div
-            className={styles.board_icon}
-            onClick={() => handleOnBoardMenu()}
-            // onClick={() => handleOnBoardModal()}
-          >
+          <div className={styles.board_icon} onClick={() => setIsOpen(!isOpen)}>
             :
           </div>
 
-          {/* <BoardModal
+          <BoardModal
             isOpen={isOpen}
             board={props.board}
             handleOnBoardModalClose={handleOnBoardModalClose}
-          /> */}
+          />
         </div>
       ) : (
         <div className={styles.board_name}>
@@ -156,9 +157,9 @@ export const Board: React.FC<Props> = (props) => {
           <div> + タスクを追加する</div>
         </div>
       )}
-      <div className={`popup-menu ${isShown ? "shown" : ""}`}>
-        <BoardMenu isShown={isShown} />
-      </div>
+      {/* <div className={`popup-menu ${isShown ? "shown" : ""}`}> */}
+      {/* <BoardMenu isShown={isShown} /> */}
+      {/* </div> */}
     </div>
   );
 };

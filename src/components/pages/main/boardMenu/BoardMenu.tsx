@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 
 interface Props {
   isShown: boolean;
+  handleOnBoardModal: () => void;
 }
 
 export const BoardMenu: React.FC<Props> = (props) => {
