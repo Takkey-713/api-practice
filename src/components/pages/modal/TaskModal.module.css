@@ -1,0 +1,65 @@
+/* .board_title {
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+} */
+
+.input_title {
+  height: 3px;
+}
+
+.modal_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* min-heightとか必要そう */
+}
+
+.textArea {
+  border: none;
+  background-color: #f3f3f3;
+  padding: 8px;
+  border-radius: 5px;
+  width: 230px;
+  line-height: 1.5em;
+  resize: none;
+}
+
+.delete_button {
+  margin-top: 20px;
+  border-style: none;
+  font-size: 12px;
+  color: rgb(196, 82, 53);
+  border-bottom: medium solid rgb(196, 82, 53);
+}
+
+.input_submit {
+  margin-top: 30px;
+  background-color: rgb(66, 163, 247);
+  color: white;
+  border-radius: 25px;
+  border-style: none;
+  padding: 16px 40px;
+  font-size: 15px;
+}
+
+.select {
+  width: 150px;
+  height: 25px;
+  font-size: 15px;
+  color: rgb(70, 70, 70);
+  border: none;
+  border-bottom: thin solid #cfcfcf;
+  outline: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete_button {
+  margin-top: 20px;
+  border-style: none;
+  font-size: 12px;
+  color: rgb(196, 82, 53);
+  border-bottom: medium solid rgb(196, 82, 53);
+}

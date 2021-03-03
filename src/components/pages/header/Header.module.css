@@ -1,0 +1,36 @@
+.header {
+  width: 100vw;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+  justify-content: center;
+  line-height: 40px;
+  padding: 4px;
+  position: relative;
+}
+
+.header__title {
+  font-weight: bold;
+  color: rgb(70, 70, 70);
+  height: 16px;
+  margin-left: 5px;
+}
+
+.header_icon {
+  color: rgb(170, 1, 1);
+}
+.header_list {
+  display: flex;
+  position: absolute;
+  right: 30px;
+}
+.ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.li {
+  margin-left: 10px;
+  cursor: pointer;
+}

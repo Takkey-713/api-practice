@@ -1,0 +1,104 @@
+.contents {
+  background-color: rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 100%;
+  position: relative;
+}
+
+.board_name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.board_name :hover {
+  opacity: 0.5;
+}
+
+.board_name_title {
+  width: 100%;
+  word-break: break-all;
+  cursor: pointer;
+}
+
+.board_icon {
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0 6px;
+  line-height: 16px;
+}
+
+.task_lists {
+  max-width: 100%;
+  max-height: 60vh;
+  overflow: auto;
+}
+.board_textarea {
+  border: none;
+  width: 100%;
+  border-radius: 5px;
+  height: 24px;
+  line-height: 24px;
+  resize: none;
+  filter: drop-shadow(0 1px rgb(9 30 66 / 25%));
+}
+
+.add_task {
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.add_task :hover {
+  opacity: 0.5;
+}
+
+.task_field {
+  color: skyblue;
+  max-width: 100%;
+  max-height: 50%;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.task_textarea {
+  width: 100%;
+  min-height: 54px;
+  max-height: 162px;
+  padding: 0;
+  border: none;
+  resize: none;
+  border-radius: 5px;
+  filter: drop-shadow(0 1px rgb(9 30 66 / 25%));
+  box-sizing: border-box;
+  padding-left: 5px;
+}
+
+.add_submit_form {
+  display: flex;
+  margin-top: 10px;
+  line-height: 18px;
+}
+
+.add_task_submit {
+  border-radius: 5px;
+  background-color: #5aac44;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.board_cancel_btn {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.task_cancel_btn {
+  cursor: pointer;
+  margin-left: 10px;
+}

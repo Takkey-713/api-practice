@@ -1,0 +1,19 @@
+.main {
+  width: 50%;
+  max-width: 400px;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.submit {
+  margin-top: 20px;
+  cursor: pointer;
+  text-transform: none;
+}
+
+.toggleLetter {
+  display: block;
+  margin-top: 10px;
+  cursor: pointer;
+  color: gray;
+}
