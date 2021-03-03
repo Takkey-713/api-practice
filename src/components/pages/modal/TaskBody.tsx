@@ -1,18 +1,20 @@
 import React, { useState, useContext } from "react";
-import styles from "./TaskModal.module.css";
+import styles from "./style/TaskModal.module.css";
 import { TaskRequest } from "../../requests/TaskRequest";
 import { TaskType, BoardType } from "../../interfaces/interface";
-import { DataContext } from "../../../Guard";
-import { DragHandleOutlined } from "@material-ui/icons";
+import { DataContext } from "../../../App";
 
 interface Props {
-  task: TaskType;
+  task?: TaskType;
   handleOnClose: () => void;
+  board: BoardType;
 }
 
 export const TaskBody: React.FC<Props> = (props) => {
   const { data, dispatch } = useContext(DataContext);
-  const [title, setTitle] = useState<string>(props.task && props.task.name);
+  const [title, setTitle] = useState<string>(
+    (props.task && props.task.name) || ""
+  );
   const [boardId, setBoardId] = useState<number>(
     (props.task && props.task.board_id) || 0
     // ボードのモーダルからタスクを作成する場合にboard_idをどうするか考える
@@ -24,17 +26,28 @@ export const TaskBody: React.FC<Props> = (props) => {
     (props.task && props.task.deadline_date) || ""
   );
   const onClickSubmit = async () => {
-    const requestData = {
-      id: props.task && props.task.id,
-      name: title,
-      board_id: boardId,
-      explanation: explanation,
-      deadline_date: deadlineDate,
-    };
+    const requestData = props.task
+      ? {
+          id: props.task && props.task.id,
+          name: title,
+          board_id: boardId,
+          explanation: explanation,
+          deadline_date: deadlineDate,
+        }
+      : {
+          name: title,
+          board_id: props.board.id,
+          explanation: explanation,
+          deadline_date: deadlineDate,
+        };
+
     try {
-      const tasks: TaskType[] = await TaskRequest("updateTasks", {
-        data: requestData,
-      });
+      const tasks: TaskType[] = await TaskRequest(
+        props.task ? "updateTasks" : "createTasks",
+        {
+          data: requestData,
+        }
+      );
       dispatch({ type: "tasksUpdate", payload: { task: tasks } });
     } catch (err) {
       alert("通信に失敗しました。");
@@ -67,6 +80,7 @@ export const TaskBody: React.FC<Props> = (props) => {
           type="text"
           className={styles.textArea}
           value={title}
+          placeholder="タスクのタイトルを入力してください"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setTitle(e.target.value)
           }
@@ -92,14 +106,18 @@ export const TaskBody: React.FC<Props> = (props) => {
         <h4 className={styles.input_title}>リスト</h4>
         <select
           className={styles.select}
-          value={boardId}
+          value={props.task ? boardId : props.board.id}
           onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
             setBoardId(Number(e.target.value))
           }
         >
           {data.boards &&
             data.boards.map((board: BoardType) => {
-              return (
+              return props.task ? (
+                <option key={board.id} value={board.id}>
+                  {board.name}
+                </option>
+              ) : (
                 <option key={board.id} value={board.id}>
                   {board.name}
                 </option>
@@ -111,7 +129,7 @@ export const TaskBody: React.FC<Props> = (props) => {
       <input
         className={styles.input_submit}
         type="button"
-        value={props.task ? "更新" : "タスクを追加する"}
+        value={props.task ? "タスクを更新する" : "タスクを追加する"}
         onClick={() => onClickSubmit()}
       />
 

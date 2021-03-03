@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { TaskBody } from "./TaskBody";
-import { TaskType } from "../../interfaces/interface";
+import { BoardType, TaskType } from "../../interfaces/interface";
 
 const styles = {
   overlay: {
@@ -21,17 +21,11 @@ const styles = {
 interface Props {
   handleClose: () => void;
   isOpen: boolean;
-  task: TaskType;
+  task?: TaskType;
+  board: BoardType;
 }
 
 export const FormModal = (props: Props) => {
-  // const handleOpen = () => {
-  //   setIsOpen(true);
-  // };
-  // const handleClose = () => {
-  //   setIsOpen(false);
-  // };
-
   Modal.setAppElement("#root");
 
   return (
@@ -41,7 +35,15 @@ export const FormModal = (props: Props) => {
         onRequestClose={props.handleClose}
         style={styles}
       >
-        <TaskBody task={props.task} handleOnClose={props.handleClose} />
+        {props.task ? (
+          <TaskBody
+            task={props.task}
+            handleOnClose={props.handleClose}
+            board={props.board}
+          />
+        ) : (
+          <TaskBody handleOnClose={props.handleClose} board={props.board} />
+        )}
       </Modal>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { DataContext } from "../../../Guard";
+import { DataContext } from "../../../App";
 import { Board } from "./board/Board";
 import { BoardType, TaskType } from "../../interfaces/interface";
 import styles from "./Main.module.css";

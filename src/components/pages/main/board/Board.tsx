@@ -2,13 +2,10 @@ import React, { useState, useContext, useRef } from "react";
 import { BoardType, TaskType } from "../../../interfaces/interface";
 import styles from "./Board.module.css";
 import { Task } from "../task/Task";
-// import { CancelOutlined } from "@material-ui/icons";
 import { BoardRequest } from "../../../requests/BoardRequest";
 import { TaskRequest } from "../../../requests/TaskRequest";
-import { DataContext } from "../../../../Guard";
+import { DataContext } from "../../../../App";
 import { BoardModal } from "../../../../components/pages/modal/BoardModal";
-// import { BoardMenu } from "../../../pages/main/boardMenu/BoardMenu";
-// import "./popup.css";
 
 interface Props {
   board: BoardType;
@@ -22,19 +19,13 @@ export const Board: React.FC<Props> = (props) => {
   const { data, dispatch } = useContext(DataContext);
   const [taskName, setTaskName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  // const [isShown, setIsShown] = useState(false);
-
-  const requestTaskData: TaskType = {
-    name: taskName,
-    board_id: props.board.id,
-  };
-
-  const requestBoardData: BoardType = {
-    id: props.board.id,
-    name: boardName,
-  };
 
   const onClickSubmit = async () => {
+    const requestTaskData: TaskType = {
+      name: taskName,
+      board_id: props.board.id,
+    };
+
     try {
       const tasks: TaskType[] = await TaskRequest("createTasks", {
         data: requestTaskData,
@@ -46,16 +37,12 @@ export const Board: React.FC<Props> = (props) => {
     }
   };
 
-  const handleOnBoardModalClose = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const handleOnBoardOpen = () => {
-    setBoardOpen(!boardOpen);
-    setBoardName(props.board.name);
-  };
-
   const onKeySubmit = async (e: React.KeyboardEvent) => {
+    const requestBoardData: BoardType = {
+      id: props.board.id,
+      name: boardName,
+    };
+
     if (e.key === "Enter") {
       try {
         const boards: BoardType[] = await BoardRequest("updateBoards", {
@@ -71,9 +58,14 @@ export const Board: React.FC<Props> = (props) => {
     }
   };
 
-  // const handleOnBoardMenu = () => {
-  //   setIsShown(!isShown);
-  // };
+  const handleOnBoardModalClose = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOnBoardOpen = () => {
+    setBoardOpen(!boardOpen);
+    setBoardName(props.board.name);
+  };
 
   const clickOnTaskAdd = () => {
     setTaskAddIsOpen(!taskAddIsOpen);
@@ -97,6 +89,7 @@ export const Board: React.FC<Props> = (props) => {
             isOpen={isOpen}
             board={props.board}
             handleOnBoardModalClose={handleOnBoardModalClose}
+            tasks={props.tasks}
           />
         </div>
       ) : (

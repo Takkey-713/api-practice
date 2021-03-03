@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { BoardType, TaskType } from "../../../interfaces/interface";
 import styles from "./Task.module.css";
-import QueryBuilderIcon from "@material-ui/icons/QueryBuilder";
-// このアイコンはモーダルのタスクで使用する
 import { FormModal } from "../../modal/FormModal";
 
 interface Props {
@@ -35,7 +33,12 @@ export const Task: React.FC<Props> = (props) => {
         <div className={styles.task_name}>{props.task.name}</div>
       </div>
 
-      <FormModal handleClose={handleClose} isOpen={isOpen} task={props.task} />
+      <FormModal
+        handleClose={handleClose}
+        isOpen={isOpen}
+        task={props.task}
+        board={props.board}
+      />
     </>
   );
 };

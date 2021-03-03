@@ -1,0 +1,27 @@
+.modal_body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board_title {
+}
+
+.task_name {
+  cursor: pointer;
+}
+
+.task_field {
+  display: flex;
+}
+
+.board_delete_btn {
+  cursor: pointer;
+  margin-top: 20px;
+  border-radius: 5px;
+  border-style: none;
+  font-size: 12px;
+  color: rgb(196, 82, 53);
+  border-bottom: medium solid rgb(196, 82, 53);
+}

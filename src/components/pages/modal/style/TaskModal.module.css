@@ -57,6 +57,7 @@
 }
 
 .delete_button {
+  cursor: pointer;
   margin-top: 20px;
   border-style: none;
   font-size: 12px;

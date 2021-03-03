@@ -20,7 +20,7 @@ export const DataContext = React.createContext<dataContextType>(
   {} as dataContextType
 );
 
-export const Guard: React.FC = () => {
+export const App: React.FC = () => {
   // ここにtask,board,userのstateを管理する
   const [data, dispatch] = useDataReducer();
   // eslint-disable-next-line

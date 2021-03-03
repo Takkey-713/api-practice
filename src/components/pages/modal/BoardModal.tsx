@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
 import Modal from "react-modal";
-import { BoardType } from "../../interfaces/interface";
+import { BoardType, TaskType } from "../../interfaces/interface";
 import { BoardRequest } from "../../requests/BoardRequest";
-import styles from "./boardModal.module.css";
-import { DataContext } from "../../../Guard";
+import { TaskRequest } from "../../requests/TaskRequest";
+import styles from ".//style/boardModal.module.css";
+import { DataContext } from "../../../App";
+import { FormModal } from "./FormModal";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 const Style = {
   overlay: {
@@ -24,12 +27,17 @@ interface Props {
   isOpen: boolean;
   board: BoardType;
   handleOnBoardModalClose: () => void;
+  tasks?: TaskType[];
 }
 
 Modal.setAppElement("#root");
 
 export const BoardModal: React.FC<Props> = (props) => {
   const { data, dispatch } = useContext(DataContext);
+  const [isTaskOpen, setIsTaskOpen] = useState(false);
+  // 既存のタスクをモーダルで表示するためのstate
+  const [isShown, setIsShown] = useState(false);
+  // 新規タスクを追加するためのモーダルを表示するためのstate
 
   const handleOnDeleteBoard = async () => {
     const requestData = {
@@ -46,6 +54,32 @@ export const BoardModal: React.FC<Props> = (props) => {
       alert("通信に失敗しました。");
     }
   };
+  // async try catch をリファクタしたい
+
+  const handleOnDelete = async (task: TaskType) => {
+    const requestData = {
+      id: task.id,
+      name: task.name,
+      board_id: task.board_id,
+    };
+    try {
+      const tasks: TaskType[] = await TaskRequest("deleteTasks", {
+        data: requestData,
+      });
+      dispatch({ type: "tasksUpdate", payload: { task: tasks } });
+    } catch (err) {
+      alert("通信に失敗しました。");
+    }
+  };
+  // async try catch をリファクタしたい
+
+  const handleOnTaskModal = () => {
+    setIsTaskOpen(!isTaskOpen);
+  };
+
+  const handleAddTaksModal = () => {
+    setIsShown(!isShown);
+  };
 
   return (
     <div>
@@ -54,13 +88,51 @@ export const BoardModal: React.FC<Props> = (props) => {
         onRequestClose={props.handleOnBoardModalClose}
         style={Style}
       >
-        <div>
-          <span
+        <div className={styles.modal_body}>
+          <div className={styles.board_title}>{props.board.name}</div>
+          <div className={styles.task_lists}>
+            {/* ここの部分にoverflowを装飾する */}
+            {props.tasks &&
+              props.tasks.map((task) => {
+                return (
+                  <div className={styles.task_field}>
+                    <div
+                      className={styles.task_name}
+                      onClick={() => handleOnTaskModal()}
+                    >
+                      {task.name}
+                    </div>
+                    <FormModal
+                      isOpen={isTaskOpen}
+                      handleClose={handleOnTaskModal}
+                      task={task}
+                      board={props.board}
+                    />
+
+                    <DeleteIcon onClick={() => handleOnDelete(task)} />
+                  </div>
+                );
+              })}
+            <button
+              className={styles.add_task}
+              onClick={() => setIsShown(!isShown)}
+            >
+              タスクを追加する
+            </button>
+            <FormModal
+              isOpen={isShown}
+              handleClose={handleAddTaksModal}
+              board={props.board}
+            />
+          </div>
+
+          <button
             className={styles.board_delete_btn}
-            onClick={() => handleOnDeleteBoard()}
+            type="button"
+            onClick={handleOnDeleteBoard}
           >
-            リストを削除する
-          </span>
+            このリストを削除する
+          </button>
         </div>
       </Modal>
     </div>
