@@ -95,7 +95,7 @@ export const BoardModal: React.FC<Props> = (props) => {
             {props.tasks &&
               props.tasks.map((task) => {
                 return (
-                  <div className={styles.task_field}>
+                  <div className={styles.task_field} key={task.id}>
                     <div
                       className={styles.task_name}
                       onClick={() => handleOnTaskModal()}
@@ -108,7 +108,6 @@ export const BoardModal: React.FC<Props> = (props) => {
                       task={task}
                       board={props.board}
                     />
-
                     <DeleteIcon onClick={() => handleOnDelete(task)} />
                   </div>
                 );
