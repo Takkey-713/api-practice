@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { BoardType, TaskType } from "../../interfaces/interface";
 import { BoardRequest } from "../../requests/BoardRequest";
 import { TaskRequest } from "../../requests/TaskRequest";
-import styles from ".//style/boardModal.module.css";
+import styles from ".//style/BoardModal.module.css";
 import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -14,11 +14,10 @@ const Style = {
   },
   content: {
     top: "10%",
-    left: "60%",
+    left: "30%",
     right: "50%",
     height: "75vh",
     width: "20vw",
-    marginLeft: "-30vw",
     padding: "2vw 10vw",
   },
 };
@@ -54,7 +53,6 @@ export const BoardModal: React.FC<Props> = (props) => {
       alert("通信に失敗しました。");
     }
   };
-  // async try catch をリファクタしたい
 
   const handleOnDelete = async (task: TaskType) => {
     const requestData = {
@@ -71,7 +69,6 @@ export const BoardModal: React.FC<Props> = (props) => {
       alert("通信に失敗しました。");
     }
   };
-  // async try catch をリファクタしたい
 
   const handleOnTaskModal = () => {
     setIsTaskOpen(!isTaskOpen);
@@ -91,11 +88,11 @@ export const BoardModal: React.FC<Props> = (props) => {
         <div className={styles.modal_body}>
           <div className={styles.board_title}>{props.board.name}</div>
           <div className={styles.task_lists}>
-            {/* ここの部分にoverflowを装飾する */}
+            {/* ここの部分にoverflow-yを装飾する */}
             {props.tasks &&
               props.tasks.map((task) => {
                 return (
-                  <div className={styles.task_field}>
+                  <div className={styles.task_field} key={task.id}>
                     <div
                       className={styles.task_name}
                       onClick={() => handleOnTaskModal()}
@@ -107,8 +104,8 @@ export const BoardModal: React.FC<Props> = (props) => {
                       handleClose={handleOnTaskModal}
                       task={task}
                       board={props.board}
+                      key={task.id}
                     />
-
                     <DeleteIcon onClick={() => handleOnDelete(task)} />
                   </div>
                 );

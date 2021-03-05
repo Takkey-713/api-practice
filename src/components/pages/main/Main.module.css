@@ -3,7 +3,7 @@
   height: calc(100% - 58px);
   display: flex;
   overflow-x: auto;
-  margin-top: 10px;
+  padding-top: 60px;
 }
 
 .board_list {

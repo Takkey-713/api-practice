@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Header.module.css";
 import DoneOutlineIcon from "@material-ui/icons/DoneOutline";
+import { SearchForm } from "../search/SearchForm";
 
 interface Props {
   handleOnLogout: () => void;
@@ -9,20 +10,18 @@ interface Props {
 export const Header: React.FC<Props> = (props) => {
   return (
     <div className={styles.header}>
-      <div>
-        <DoneOutlineIcon
-          className={styles.header_icon}
-          style={{ fontSize: "large" }}
-        />
+      <div className={styles.header_search_area}>
+        <SearchForm />
       </div>
 
-      <div className={styles.header__title}>TaskApp</div>
+      <div className={styles.header_title_list}>
+        <div className={styles.header_title}>Task App</div>
+      </div>
+
       <div className={styles.header_list}>
         <ul className={styles.ul}>
-          <li className={styles.li}>_</li>
-          <li className={styles.li}>__</li>
           <li className={styles.li} onClick={() => props.handleOnLogout()}>
-            ログアウト
+            Logout
           </li>
         </ul>
       </div>

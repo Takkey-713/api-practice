@@ -16,9 +16,21 @@ export const Board: React.FC<Props> = (props) => {
   const [boardOpen, setBoardOpen] = useState(true);
   const [taskAddIsOpen, setTaskAddIsOpen] = useState<boolean>(false);
   const [boardName, setBoardName] = useState(props.board.name);
-  const { data, dispatch } = useContext(DataContext);
   const [taskName, setTaskName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data, dispatch } = useContext(DataContext);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const scrollToBottomOfList = React.useCallback(() => {
+    if (ref && ref.current) {
+      ref.current.scrollIntoView({
+        behavior: "auto",
+        block: "end",
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref]);
 
   const onClickSubmit = async () => {
     const requestTaskData: TaskType = {
@@ -35,6 +47,7 @@ export const Board: React.FC<Props> = (props) => {
     } catch (err) {
       alert("通信に失敗しました。");
     }
+    scrollToBottomOfList();
   };
 
   const onKeySubmit = async (e: React.KeyboardEvent) => {
@@ -54,7 +67,7 @@ export const Board: React.FC<Props> = (props) => {
         alert("通信に失敗しました。");
       }
     } else {
-      return;
+      return false;
     }
   };
 
@@ -103,8 +116,6 @@ export const Board: React.FC<Props> = (props) => {
             onKeyPress={(e: React.KeyboardEvent) => onKeySubmit(e)}
           />
 
-          {/* ↑リストのタイトルの追加を行いたい(あと回し)→理想はenterキーをおしたり、スコープ外をクリックすると更新がかかる感じにしたい */}
-
           <div
             className={styles.board_cancel_btn}
             onClick={() => setBoardOpen(!boardOpen)}
@@ -116,7 +127,12 @@ export const Board: React.FC<Props> = (props) => {
       <div className={styles.task_lists}>
         {props.tasks &&
           props.tasks.map((task: TaskType) => {
-            return <Task task={task} board={props.board} key={task.id} />;
+            return (
+              <div key={task.id}>
+                <Task task={task} board={props.board} />
+                <div ref={ref}></div>
+              </div>
+            );
           })}
       </div>
       {taskAddIsOpen ? (
@@ -150,9 +166,6 @@ export const Board: React.FC<Props> = (props) => {
           <div> + タスクを追加する</div>
         </div>
       )}
-      {/* <div className={`popup-menu ${isShown ? "shown" : ""}`}> */}
-      {/* <BoardMenu isShown={isShown} /> */}
-      {/* </div> */}
     </div>
   );
 };

@@ -44,6 +44,11 @@
   font-size: 15px;
 }
 
+.deadline_date_msg {
+  font-size: 10px;
+  color: rgb(196, 82, 53);
+}
+
 .select {
   width: 150px;
   height: 25px;
