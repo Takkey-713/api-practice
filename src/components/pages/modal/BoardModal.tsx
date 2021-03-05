@@ -6,7 +6,7 @@ import { TaskRequest } from "../../requests/TaskRequest";
 import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
-import styles from "./style/BoardModal.module.css";
+import styles from "./style/boardModal.module.css";
 
 const Style = {
   overlay: {
