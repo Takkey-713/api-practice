@@ -6,15 +6,44 @@
 }
 
 .board_title {
-  font-size: 14px;
+  font-size: 20px;
 }
 
-.task_name {
-  cursor: pointer;
+.task_lists {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .task_field {
+  margin-top: 10px;
   display: flex;
+  width: 260px;
+}
+
+.task_name {
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.add_option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add_task {
+  cursor: pointer;
+  border-style: none;
+  font-size: 12px;
+  margin-top: 20px;
+  border-radius: 5px;
+  border-bottom: medium solid rgb(169, 206, 236);
 }
 
 .board_delete_btn {
