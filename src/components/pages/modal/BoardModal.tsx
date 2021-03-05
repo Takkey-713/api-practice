@@ -6,7 +6,7 @@ import { TaskRequest } from "../../requests/TaskRequest";
 import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
-import styles from "./style/BoardModal.module.css";
+import styles from "./style/boardModal.module.css";
 
 const Style = {
   overlay: {
@@ -103,7 +103,7 @@ export const BoardModal: React.FC<Props> = (props) => {
                       style={{
                         fontSize: "20px",
                         cursor: "pointer",
-                        marginLeft: "10px",
+                        margin: "2px 0px 0px 10px",
                       }}
                     />
                     <FormModal
