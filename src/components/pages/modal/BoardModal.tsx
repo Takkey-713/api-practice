@@ -3,10 +3,10 @@ import Modal from "react-modal";
 import { BoardType, TaskType } from "../../interfaces/interface";
 import { BoardRequest } from "../../requests/BoardRequest";
 import { TaskRequest } from "../../requests/TaskRequest";
-import styles from ".//style/BoardModal.module.css";
 import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
+import styles from "./style/BoardModal.module.css";
 
 const Style = {
   overlay: {
@@ -88,7 +88,6 @@ export const BoardModal: React.FC<Props> = (props) => {
         <div className={styles.modal_body}>
           <div className={styles.board_title}>{props.board.name}</div>
           <div className={styles.task_lists}>
-            {/* ここの部分にoverflow-yを装飾する */}
             {props.tasks &&
               props.tasks.map((task) => {
                 return (
@@ -99,6 +98,14 @@ export const BoardModal: React.FC<Props> = (props) => {
                     >
                       {task.name}
                     </div>
+                    <DeleteIcon
+                      onClick={() => handleOnDelete(task)}
+                      style={{
+                        fontSize: "20px",
+                        cursor: "pointer",
+                        marginLeft: "10px",
+                      }}
+                    />
                     <FormModal
                       isOpen={isTaskOpen}
                       handleClose={handleOnTaskModal}
@@ -106,10 +113,11 @@ export const BoardModal: React.FC<Props> = (props) => {
                       board={props.board}
                       key={task.id}
                     />
-                    <DeleteIcon onClick={() => handleOnDelete(task)} />
                   </div>
                 );
               })}
+          </div>
+          <div className={styles.add_option}>
             <button
               className={styles.add_task}
               onClick={() => setIsShown(!isShown)}
@@ -121,15 +129,14 @@ export const BoardModal: React.FC<Props> = (props) => {
               handleClose={handleAddTaksModal}
               board={props.board}
             />
+            <button
+              className={styles.board_delete_btn}
+              type="button"
+              onClick={handleOnDeleteBoard}
+            >
+              このリストを削除する
+            </button>
           </div>
-
-          <button
-            className={styles.board_delete_btn}
-            type="button"
-            onClick={handleOnDeleteBoard}
-          >
-            このリストを削除する
-          </button>
         </div>
       </Modal>
     </div>
