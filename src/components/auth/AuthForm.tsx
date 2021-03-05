@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./AuthForm.module.css";
+import styles from "./style/AuthForm.module.css";
 import { Avatar, Button, TextField, Grid, Typography } from "@material-ui/core";
 import EmailIcon from "@material-ui/icons/Email";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -7,6 +7,7 @@ import { loginAuthData } from "../interfaces/userAuth";
 import { registAuthData } from "../interfaces/userAuth";
 import { AuthRequest } from "../requests/AuthRequest";
 import { UserType } from "../../components/interfaces/interface";
+import { AuthHeader } from "./AuthHeader";
 
 interface Props {
   isLoggedIn: boolean;
@@ -61,124 +62,127 @@ export const AuthForm: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className={styles.main}>
-      <Avatar>
-        <LockOutlinedIcon />
-      </Avatar>
-      <Typography component="h1" variant="h5">
-        {display ? "Login" : "Regster"}
-      </Typography>
-      <form noValidate className={styles.form}>
-        <div className={styles.textfield}>
-          <TextField
-            className={styles.textfield}
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email"
-            name="email"
-            autoComplete="email"
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setEmail(e.target.value);
-            }}
-            autoFocus
-          />
-        </div>
-        <div className={styles.textfield}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setPassword(e.target.value);
-            }}
-          />
-          {display ? (
-            <></>
-          ) : (
+    <div>
+      <AuthHeader />
+      <div className={styles.main}>
+        <Avatar>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5" style={{ marginTop: "15px" }}>
+          {display ? "Login" : "Regster"}
+        </Typography>
+        <form noValidate className={styles.form}>
+          <div className={styles.textfield}>
             <TextField
+              className={styles.textfield}
               variant="outlined"
               margin="normal"
               required
               fullWidth
-              name="password_confirmation"
-              label="Confirmation Password"
-              type="password"
-              id="password_confirmation"
-              autoComplete="current-password"
-              value={passwordConfirmation}
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
+              value={email}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setPasswordConfirmation(e.target.value);
+                setEmail(e.target.value);
+              }}
+              autoFocus
+            />
+          </div>
+          <div className={styles.textfield}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(e.target.value);
               }}
             />
-          )}
-        </div>
+            {display ? (
+              <></>
+            ) : (
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password_confirmation"
+                label="Confirmation Password"
+                type="password"
+                id="password_confirmation"
+                autoComplete="current-password"
+                value={passwordConfirmation}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setPasswordConfirmation(e.target.value);
+                }}
+              />
+            )}
+          </div>
 
-        <Grid container>
-          <Grid item>
-            <span
-              onClick={() => setDisplay(!display)}
-              className={styles.toggleLetter}
-            >
-              {display ? "Create new acount ?" : "Back to Sign in"}
-            </span>
+          <Grid container>
+            <Grid item>
+              <span
+                onClick={() => setDisplay(!display)}
+                className={styles.toggleLetter}
+              >
+                {display ? "Create new acount ?" : "Back to Sign in"}
+              </span>
+            </Grid>
           </Grid>
-        </Grid>
-
-        <div className={styles.submit}>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            startIcon={<EmailIcon />}
-            style={{
-              textTransform: "none",
-            }}
-            onClick={
-              display
-                ? async () => {
-                    try {
-                      await loginUser();
-                    } catch (err) {
-                      alert(err.message);
-                    }
-                  }
-                : async () => {
-                    try {
-                      await registerUser();
-                    } catch (err) {
-                      alert(err.message);
-                    }
-                  }
-            }
-          >
-            {display ? "Login" : "Regster"}
-          </Button>
 
           <div className={styles.submit}>
             <Button
               fullWidth
               variant="contained"
-              color="secondary"
+              color="primary"
+              startIcon={<EmailIcon />}
               style={{
                 textTransform: "none",
               }}
-              // onClick={signInGoogle}
+              onClick={
+                display
+                  ? async () => {
+                      try {
+                        await loginUser();
+                      } catch (err) {
+                        alert(err.message);
+                      }
+                    }
+                  : async () => {
+                      try {
+                        await registerUser();
+                      } catch (err) {
+                        alert(err.message);
+                      }
+                    }
+              }
             >
-              Sign in with Google
+              {display ? "Login" : "Regster"}
             </Button>
+
+            <div className={styles.submit}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                style={{
+                  textTransform: "none",
+                }}
+                // onClick={signInGoogle}
+              >
+                Sign in with Google
+              </Button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
