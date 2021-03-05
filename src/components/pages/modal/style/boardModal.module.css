@@ -12,18 +12,20 @@
 .task_lists {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  margin-top: 20px;
 }
 
 .task_field {
   margin-top: 10px;
   display: flex;
-  width: 260px;
+  color: #172b4d;
+  border-radius: 5px;
+  max-width: 260px;
+  background-color: ;
 }
 
 .task_name {
-  width: 100%;
+  flex-basis: 100%;
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
@@ -31,6 +33,7 @@
 }
 
 .add_option {
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;

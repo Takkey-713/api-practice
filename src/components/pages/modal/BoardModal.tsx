@@ -103,7 +103,7 @@ export const BoardModal: React.FC<Props> = (props) => {
                       style={{
                         fontSize: "20px",
                         cursor: "pointer",
-                        marginLeft: "10px",
+                        margin: "2px 0px 0px 10px",
                       }}
                     />
                     <FormModal
