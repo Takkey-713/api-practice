@@ -2,7 +2,8 @@
 React-Hooksを用いて実装しています。
 
 ※アプリケーション動作GIF
-![TaskApp](https://user-images.githubusercontent.com/70302566/110121696-0db60880-7e02-11eb-9d2f-3eeee9ea1855.gif)
+![TaskApp 2](https://user-images.githubusercontent.com/70302566/110128591-51ad0b80-7e0a-11eb-8d14-3ae1640ffd20.gif)
+
 
 ユーザー認証(新規登録)
 ・emailとpasswordと確認passwordを入力します。
@@ -70,5 +71,4 @@ React-Hooksを用いて実装しています。
 
 以上が本アプリケーションの使い方になります。
 
-
-
+現在レスポンシブ対応と本番環境へのアップロードしております。申し訳ございませんが、少々お待ちください。
