@@ -9,11 +9,10 @@ const styles = {
   },
   content: {
     top: "10%",
-    left: "60%",
+    left: "30%",
     right: "50%",
     height: "75vh",
     width: "20vw",
-    marginLeft: "-30vw",
     padding: "2vw 10vw",
   },
 };

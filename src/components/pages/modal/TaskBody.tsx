@@ -17,7 +17,6 @@ export const TaskBody: React.FC<Props> = (props) => {
   );
   const [boardId, setBoardId] = useState<number>(
     (props.task && props.task.board_id) || 0
-    // ボードのモーダルからタスクを作成する場合にboard_idをどうするか考える
   );
   const [explanation, setExplanation] = useState<string>(
     (props.task && props.task.explanation) || ""
@@ -76,12 +75,11 @@ export const TaskBody: React.FC<Props> = (props) => {
       <h2 className={styles.input_menu}></h2>
       <div>
         <h4 className={styles.input_title}>タイトル</h4>
-        <input
-          type="text"
+        <textarea
           className={styles.textArea}
           value={title}
           placeholder="タスクのタイトルを入力してください"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setTitle(e.target.value)
           }
         />
@@ -95,6 +93,7 @@ export const TaskBody: React.FC<Props> = (props) => {
           }
         />
         <h4 className={styles.input_title}>期限</h4>
+
         <input
           className={styles.input_date}
           type="date"
@@ -103,6 +102,13 @@ export const TaskBody: React.FC<Props> = (props) => {
             setDeadlineDate(e.target.value)
           }
         />
+        <div className={styles.deadline_date_msg}>
+          {props.task &&
+          props.task.deadline_date &&
+          new Date(props.task.deadline_date) < new Date()
+            ? "※期限が過ぎています"
+            : ""}
+        </div>
         <h4 className={styles.input_title}>リスト</h4>
         <select
           className={styles.select}

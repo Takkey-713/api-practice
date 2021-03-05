@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, RefObject } from "react";
+import React, { useState, useContext, useRef } from "react";
 import { BoardType, TaskType } from "../../../interfaces/interface";
 import styles from "./Board.module.css";
 import { Task } from "../task/Task";
@@ -116,8 +116,6 @@ export const Board: React.FC<Props> = (props) => {
             onKeyPress={(e: React.KeyboardEvent) => onKeySubmit(e)}
           />
 
-          {/* ↑リストのタイトルの追加を行いたい(あと回し)→理想はenterキーをおしたり、スコープ外をクリックすると更新がかかる感じにしたい */}
-
           <div
             className={styles.board_cancel_btn}
             onClick={() => setBoardOpen(!boardOpen)}
@@ -130,10 +128,10 @@ export const Board: React.FC<Props> = (props) => {
         {props.tasks &&
           props.tasks.map((task: TaskType) => {
             return (
-              <>
-                <Task task={task} board={props.board} key={task.id} />
+              <div key={task.id}>
+                <Task task={task} board={props.board} />
                 <div ref={ref}></div>
-              </>
+              </div>
             );
           })}
       </div>
