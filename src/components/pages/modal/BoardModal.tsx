@@ -3,10 +3,10 @@ import Modal from "react-modal";
 import { BoardType, TaskType } from "../../interfaces/interface";
 import { BoardRequest } from "../../requests/BoardRequest";
 import { TaskRequest } from "../../requests/TaskRequest";
-import styles from "./style/BoardModal.module.css";
 import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
+import styles from "./style/BoardModal.module.css";
 
 const Style = {
   overlay: {
