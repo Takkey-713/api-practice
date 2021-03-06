@@ -128,10 +128,10 @@ export const Board: React.FC<Props> = (props) => {
         {props.tasks &&
           props.tasks.map((task: TaskType) => {
             return (
-              <div key={task.id}>
+              <>
                 <Task task={task} board={props.board} />
-                <div ref={ref}></div>
-              </div>
+                <div className="scroll_ref" ref={ref}></div>
+              </>
             );
           })}
       </div>

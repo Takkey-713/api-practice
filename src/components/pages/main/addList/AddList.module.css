@@ -3,9 +3,9 @@
   max-height: 44px;
   width: 100%;
   cursor: pointer;
-  transition: top bottom ease 0.2s;
   padding: 5px;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .add_board :hover {

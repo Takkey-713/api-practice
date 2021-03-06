@@ -35,12 +35,12 @@
 }
 
 .input_submit {
-  margin-top: 30px;
+  margin-top: 20px;
   background-color: rgb(66, 163, 247);
   color: white;
   border-radius: 25px;
   border-style: none;
-  padding: 16px 40px;
+  padding: 8px 20px;
   font-size: 15px;
 }
 

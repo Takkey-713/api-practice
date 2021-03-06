@@ -119,7 +119,7 @@ export const BoardModal: React.FC<Props> = (props) => {
           </div>
           <div className={styles.add_option}>
             <button
-              className={styles.add_task}
+              className={styles.add_task_btn}
               onClick={() => setIsShown(!isShown)}
             >
               タスクを追加する

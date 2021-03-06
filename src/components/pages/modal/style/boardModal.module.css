@@ -16,8 +16,9 @@
 }
 
 .task_field {
-  margin-top: 10px;
   display: flex;
+  line-height: 25px;
+  margin-top: 10px;
   color: #172b4d;
   max-width: 260px;
 }
@@ -31,28 +32,43 @@
 }
 
 .add_option {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.add_task {
-  cursor: pointer;
-  border-style: none;
+.add_task_btn {
+  width: 135px;
   font-size: 12px;
   margin-top: 20px;
   border-radius: 5px;
-  border-bottom: medium solid rgb(169, 206, 236);
+  box-shadow: 0px 3px rgb(169, 206, 236);
+  cursor: pointer;
+  border-style: none;
+  outline: none;
+}
+
+.add_task_btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }
 
 .board_delete_btn {
-  cursor: pointer;
+  width: 135px;
   margin-top: 20px;
   border-radius: 5px;
+  cursor: pointer;
   border-style: none;
+  outline: none;
   font-size: 12px;
   color: rgb(196, 82, 53);
-  border-bottom: medium solid rgb(196, 82, 53);
+  box-shadow: 0px 3px rgb(196, 82, 53);
+}
+
+.board_delete_btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }
