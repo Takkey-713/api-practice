@@ -2,7 +2,8 @@
 React-Hooksを用いて実装しています。
 
 ※アプリケーション動作GIF
-![TaskApp 2](https://user-images.githubusercontent.com/70302566/110128591-51ad0b80-7e0a-11eb-8d14-3ae1640ffd20.gif)
+![Uploading TaskApp.gif…]()
+
 
 
 ユーザー認証(新規登録)
