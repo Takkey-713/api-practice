@@ -7,6 +7,7 @@ import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./style/boardModal.module.css";
+import { useMediaQuery } from "react-responsive";
 
 const Style = {
   overlay: {
@@ -47,8 +48,9 @@ export const BoardModal: React.FC<Props> = (props) => {
       const boards: BoardType[] = await BoardRequest("deleteBoards", {
         data: requestData,
       });
-      dispatch({ type: "boardsUpdate", payload: { board: boards } });
+
       props.handleOnBoardModalClose();
+      dispatch({ type: "boardsUpdate", payload: { board: boards } });
     } catch (err) {
       alert("通信に失敗しました。");
     }

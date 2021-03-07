@@ -20,18 +20,13 @@ export const AuthForm: React.FC<Props> = (props) => {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const registUerData: registAuthData = {
-    email: email,
-    password: password,
-    password_confirmation: passwordConfirmation,
-  };
-
-  const loginUserData: loginAuthData = {
-    email: email,
-    password: password,
-  };
-
   const registerUser = async () => {
+    const registUerData: registAuthData = {
+      email: email,
+      password: password,
+      password_confirmation: passwordConfirmation,
+    };
+
     try {
       const res = await AuthRequest("sign_up", {
         data: registUerData,
@@ -39,7 +34,7 @@ export const AuthForm: React.FC<Props> = (props) => {
       if (res.logged_in && res.user) {
         props.handleOnChangeStatus(res.user);
       } else {
-        alert(`${res.data.errors}`);
+        alert(`${res.errors}`);
       }
     } catch (err) {
       alert("通信に失敗しました。");
@@ -47,6 +42,10 @@ export const AuthForm: React.FC<Props> = (props) => {
   };
 
   const loginUser = async () => {
+    const loginUserData: loginAuthData = {
+      email: email,
+      password: password,
+    };
     try {
       const res = await AuthRequest("sign_in", {
         data: loginUserData,
@@ -77,7 +76,6 @@ export const AuthForm: React.FC<Props> = (props) => {
               className={styles.textfield}
               variant="outlined"
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email"
@@ -111,7 +109,6 @@ export const AuthForm: React.FC<Props> = (props) => {
               <TextField
                 variant="outlined"
                 margin="normal"
-                required
                 fullWidth
                 name="password_confirmation"
                 label="Confirmation Password"

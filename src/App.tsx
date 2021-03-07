@@ -77,6 +77,7 @@ export const App: React.FC = () => {
   useEffect(() => {
     checkLoginStatus();
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {

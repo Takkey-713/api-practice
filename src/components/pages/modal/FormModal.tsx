@@ -5,7 +5,7 @@ import { BoardType, TaskType } from "../../interfaces/interface";
 
 const styles = {
   overlay: {
-    backgroundColor: "rgba(0,0,0,.32)",
+    backgroundColor: "rgba(0,0,0,.64)",
   },
   content: {
     top: "10%",

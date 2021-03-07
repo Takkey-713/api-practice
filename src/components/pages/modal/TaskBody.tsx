@@ -145,7 +145,7 @@ export const TaskBody: React.FC<Props> = (props) => {
           type="button"
           onClick={handleOnDelete}
         >
-          このタスクを削除する
+          タスクを削除する
         </button>
       )}
     </form>
