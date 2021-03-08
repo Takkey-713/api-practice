@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-modal";
 import { TaskBody } from "./TaskBody";
 import { BoardType, TaskType } from "../../interfaces/interface";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-const styles = {
+const forPcStyles = {
   overlay: {
     backgroundColor: "rgba(0,0,0,.64)",
   },
@@ -17,6 +18,19 @@ const styles = {
   },
 };
 
+const forMobileStyles = {
+  overlay: {
+    backgroundColor: "rgba(0,0,0,.64)",
+  },
+  content: {
+    top: "5vh",
+    left: "5vw",
+    right: "5vw",
+    height: "85vh",
+    width: "80vw",
+  },
+};
+
 interface Props {
   handleClose: () => void;
   isOpen: boolean;
@@ -26,24 +40,45 @@ interface Props {
 
 export const FormModal = (props: Props) => {
   Modal.setAppElement("#root");
+  const mq = useMediaQuery();
 
   return (
     <div>
-      <Modal
-        isOpen={props.isOpen}
-        onRequestClose={props.handleClose}
-        style={styles}
-      >
-        {props.task ? (
-          <TaskBody
-            task={props.task}
-            handleOnClose={props.handleClose}
-            board={props.board}
-          />
-        ) : (
-          <TaskBody handleOnClose={props.handleClose} board={props.board} />
-        )}
-      </Modal>
+      {mq.isPc && (
+        <Modal
+          isOpen={props.isOpen}
+          onRequestClose={props.handleClose}
+          style={forPcStyles}
+        >
+          {props.task ? (
+            <TaskBody
+              task={props.task}
+              handleOnClose={props.handleClose}
+              board={props.board}
+            />
+          ) : (
+            <TaskBody handleOnClose={props.handleClose} board={props.board} />
+          )}
+        </Modal>
+      )}
+
+      {mq.isMobile && (
+        <Modal
+          isOpen={props.isOpen}
+          onRequestClose={props.handleClose}
+          style={forMobileStyles}
+        >
+          {props.task ? (
+            <TaskBody
+              task={props.task}
+              handleOnClose={props.handleClose}
+              board={props.board}
+            />
+          ) : (
+            <TaskBody handleOnClose={props.handleClose} board={props.board} />
+          )}
+        </Modal>
+      )}
     </div>
   );
 };
