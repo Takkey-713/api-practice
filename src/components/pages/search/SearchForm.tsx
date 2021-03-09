@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./Search.module.css";
 import { TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";

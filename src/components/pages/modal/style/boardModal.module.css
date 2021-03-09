@@ -5,6 +5,18 @@
   align-items: center;
 }
 
+@media screen and (max-width: 575px) {
+  .task_close_icon {
+    margin: 10px 0 0 300px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .task_close_icon {
+    margin: 0 0 0 520px;
+  }
+}
+
 .board_title {
   font-size: 20px;
 }
@@ -16,10 +28,11 @@
 }
 
 .task_field {
-  margin-top: 10px;
   display: flex;
+  line-height: 25px;
+  margin-top: 10px;
   color: #172b4d;
-  max-width: 260px;
+  width: 200px;
 }
 
 .task_name {
@@ -28,31 +41,50 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  border-bottom: solid 1px;
 }
 
 .add_option {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.add_task {
+.add_task_btn {
+  color: white;
+  font-size: 12px;
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 3px #29477a;
+  padding: 8px 8px;
   cursor: pointer;
   border-style: none;
-  font-size: 12px;
-  margin-top: 20px;
-  border-radius: 5px;
-  border-bottom: medium solid rgb(169, 206, 236);
+  outline: none;
+  background-color: rgb(66, 163, 247);
+}
+
+.add_task_btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }
 
 .board_delete_btn {
+  color: white;
+  margin-top: 30px;
+  border-radius: 10px;
   cursor: pointer;
-  margin-top: 20px;
-  border-radius: 5px;
   border-style: none;
+  outline: none;
   font-size: 12px;
-  color: rgb(196, 82, 53);
-  border-bottom: medium solid rgb(196, 82, 53);
+  background-color: rgb(196, 82, 53);
+  box-shadow: 0px 3px#29477a;
+  padding: 8px 8px;
+}
+
+.board_delete_btn:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }

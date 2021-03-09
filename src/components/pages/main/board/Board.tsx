@@ -130,7 +130,7 @@ export const Board: React.FC<Props> = (props) => {
             return (
               <div key={task.id}>
                 <Task task={task} board={props.board} />
-                <div ref={ref}></div>
+                <div className="scroll_ref" ref={ref}></div>
               </div>
             );
           })}

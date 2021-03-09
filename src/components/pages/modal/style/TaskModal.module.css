@@ -1,19 +1,24 @@
-/* .board_title {
-  width: 200px;
-  display: flex;
-  justify-content: space-between;
-} */
-
-.input_title {
-  height: 3px;
-}
-
 .modal_body {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* min-heightとか必要そう */
+}
+
+@media screen and (max-width: 575px) {
+  .task_close_icon {
+    margin: 10px 0 0 300px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .task_close_icon {
+    margin: 0 0 0 520px;
+  }
+}
+
+.input_title {
+  height: 3px;
 }
 
 .textArea {
@@ -26,27 +31,23 @@
   resize: none;
 }
 
-.delete_button {
-  margin-top: 20px;
-  border-style: none;
-  font-size: 12px;
-  color: rgb(196, 82, 53);
-  border-bottom: medium solid rgb(196, 82, 53);
-}
-
 .input_submit {
+  color: white;
+  cursor: pointer;
+  border-style: none;
+  outline: none;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-size: 15px;
   margin-top: 30px;
   background-color: rgb(66, 163, 247);
-  color: white;
-  border-radius: 25px;
-  border-style: none;
-  padding: 16px 40px;
-  font-size: 15px;
+  box-shadow: 0px 3px #29477a;
 }
 
-.deadline_date_msg {
-  font-size: 10px;
-  color: rgb(196, 82, 53);
+.input_submit:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }
 
 .select {
@@ -62,10 +63,25 @@
 }
 
 .delete_button {
+  color: white;
+  margin-top: 30px;
+  border-radius: 10px;
+  font-size: 15px;
+  padding: 8px 20px;
   cursor: pointer;
-  margin-top: 20px;
+  outline: none;
   border-style: none;
-  font-size: 12px;
+  background-color: rgb(196, 82, 53);
+  box-shadow: 0px 3px #29477a;
+}
+
+.deadline_date_msg {
+  font-size: 10px;
   color: rgb(196, 82, 53);
-  border-bottom: medium solid rgb(196, 82, 53);
+}
+
+.delete_button:active {
+  box-shadow: none;
+  position: relative;
+  top: 3px;
 }

@@ -7,20 +7,37 @@ import { DataContext } from "../../../App";
 import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./style/boardModal.module.css";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import CloseIcon from "@material-ui/icons/Close";
 
-const Style = {
+const forPcStyles = {
   overlay: {
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(0,0,0,.64)",
   },
   content: {
-    top: "10%",
-    left: "30%",
-    right: "50%",
-    height: "75vh",
-    width: "20vw",
-    padding: "2vw 10vw",
+    top: "10vh",
+    left: "30vw",
+    right: "30vw",
+    height: "80vh",
+    width: "40vw",
+    padding: "10px",
   },
 };
+
+const forMobileStyles = {
+  overlay: {
+    backgroundColor: "rgba(0,0,0,.64)",
+  },
+  content: {
+    top: "5vh",
+    left: "5vw",
+    right: "5vw",
+    height: "90vh",
+    width: "90vw",
+    padding: "0",
+  },
+};
+// モバイル用に変更する
 
 interface Props {
   isOpen: boolean;
@@ -37,6 +54,7 @@ export const BoardModal: React.FC<Props> = (props) => {
   // 既存のタスクをモーダルで表示するためのstate
   const [isShown, setIsShown] = useState(false);
   // 新規タスクを追加するためのモーダルを表示するためのstate
+  const mq = useMediaQuery();
 
   const handleOnDeleteBoard = async () => {
     const requestData = {
@@ -47,8 +65,9 @@ export const BoardModal: React.FC<Props> = (props) => {
       const boards: BoardType[] = await BoardRequest("deleteBoards", {
         data: requestData,
       });
-      dispatch({ type: "boardsUpdate", payload: { board: boards } });
+
       props.handleOnBoardModalClose();
+      dispatch({ type: "boardsUpdate", payload: { board: boards } });
     } catch (err) {
       alert("通信に失敗しました。");
     }
@@ -80,65 +99,139 @@ export const BoardModal: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <Modal
-        isOpen={props.isOpen}
-        onRequestClose={props.handleOnBoardModalClose}
-        style={Style}
-      >
-        <div className={styles.modal_body}>
-          <div className={styles.board_title}>{props.board.name}</div>
-          <div className={styles.task_lists}>
-            {props.tasks &&
-              props.tasks.map((task) => {
-                return (
-                  <div className={styles.task_field} key={task.id}>
-                    <div
-                      className={styles.task_name}
-                      onClick={() => handleOnTaskModal()}
-                    >
-                      {task.name}
-                    </div>
-                    <DeleteIcon
-                      onClick={() => handleOnDelete(task)}
-                      style={{
-                        fontSize: "20px",
-                        cursor: "pointer",
-                        margin: "2px 0px 0px 10px",
-                      }}
-                    />
-                    <FormModal
-                      isOpen={isTaskOpen}
-                      handleClose={handleOnTaskModal}
-                      task={task}
-                      board={props.board}
-                      key={task.id}
-                    />
-                  </div>
-                );
-              })}
-          </div>
-          <div className={styles.add_option}>
-            <button
-              className={styles.add_task}
-              onClick={() => setIsShown(!isShown)}
-            >
-              タスクを追加する
-            </button>
-            <FormModal
-              isOpen={isShown}
-              handleClose={handleAddTaksModal}
-              board={props.board}
+      {mq.isPc && (
+        <Modal
+          isOpen={props.isOpen}
+          onRequestClose={props.handleOnBoardModalClose}
+          style={forPcStyles}
+        >
+          <div className={styles.modal_body}>
+            <CloseIcon
+              style={{ cursor: "pointer" }}
+              className={styles.task_close_icon}
+              onClick={() => props.handleOnBoardModalClose()}
             />
-            <button
-              className={styles.board_delete_btn}
-              type="button"
-              onClick={handleOnDeleteBoard}
-            >
-              このリストを削除する
-            </button>
+            <div className={styles.board_title}>{props.board.name}</div>
+            <div className={styles.task_lists}>
+              {props.tasks &&
+                props.tasks.map((task) => {
+                  return (
+                    <div className={styles.task_field} key={task.id}>
+                      <div
+                        className={styles.task_name}
+                        onClick={() => handleOnTaskModal()}
+                      >
+                        {task.name}
+                      </div>
+                      <DeleteIcon
+                        onClick={() => handleOnDelete(task)}
+                        style={{
+                          fontSize: "20px",
+                          cursor: "pointer",
+                          margin: "2px 0px 0px 10px",
+                        }}
+                      />
+                      <FormModal
+                        isOpen={isTaskOpen}
+                        handleClose={handleOnTaskModal}
+                        task={task}
+                        board={props.board}
+                        key={task.id}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+            <div className={styles.add_option}>
+              <button
+                className={styles.add_task_btn}
+                onClick={() => setIsShown(!isShown)}
+              >
+                タスクを追加する
+              </button>
+              <FormModal
+                isOpen={isShown}
+                handleClose={handleAddTaksModal}
+                board={props.board}
+              />
+              <button
+                className={styles.board_delete_btn}
+                type="button"
+                onClick={handleOnDeleteBoard}
+              >
+                リストを削除する
+              </button>
+            </div>
           </div>
-        </div>
-      </Modal>
+        </Modal>
+      )}
+
+      {mq.isMobile && (
+        <Modal
+          isOpen={props.isOpen}
+          onRequestClose={props.handleOnBoardModalClose}
+          style={forMobileStyles}
+        >
+          <div className={styles.modal_body}>
+            <CloseIcon
+              style={{ cursor: "pointer" }}
+              className={styles.task_close_icon}
+              onClick={() => props.handleOnBoardModalClose()}
+            />
+            <div className={styles.board_title}>{props.board.name}</div>
+            <div className={styles.task_lists}>
+              {props.tasks &&
+                props.tasks.map((task) => {
+                  return (
+                    <div className={styles.task_field} key={task.id}>
+                      <div
+                        className={styles.task_name}
+                        onClick={() => handleOnTaskModal()}
+                      >
+                        {task.name}
+                      </div>
+                      <DeleteIcon
+                        onClick={() => handleOnDelete(task)}
+                        style={{
+                          fontSize: "20px",
+                          cursor: "pointer",
+                          margin: "2px 0px 0px 10px",
+                        }}
+                      />
+                      <FormModal
+                        isOpen={isTaskOpen}
+                        handleClose={handleOnTaskModal}
+                        task={task}
+                        board={props.board}
+                        key={task.id}
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+            <div className={styles.add_option}>
+              <button
+                className={styles.add_task_btn}
+                onClick={() => setIsShown(!isShown)}
+              >
+                タスクを追加する
+              </button>
+              <FormModal
+                isOpen={isShown}
+                handleClose={handleAddTaksModal}
+                board={props.board}
+              />
+              <button
+                className={styles.board_delete_btn}
+                type="button"
+                onClick={handleOnDeleteBoard}
+              >
+                リストを削除する
+              </button>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

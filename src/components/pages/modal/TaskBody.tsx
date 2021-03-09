@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styles from "./style/TaskModal.module.css";
 import { TaskRequest } from "../../requests/TaskRequest";
 import { TaskType, BoardType } from "../../interfaces/interface";
 import { DataContext } from "../../../App";
+import CloseIcon from "@material-ui/icons/Close";
 
 interface Props {
   task?: TaskType;
@@ -24,6 +25,9 @@ export const TaskBody: React.FC<Props> = (props) => {
   const [deadlineDate, setDeadlineDate] = useState<string>(
     (props.task && props.task.deadline_date) || ""
   );
+  useEffect(() => {
+    console.log(boardId);
+  }, [boardId]);
   const onClickSubmit = async () => {
     const requestData = props.task
       ? {
@@ -72,7 +76,11 @@ export const TaskBody: React.FC<Props> = (props) => {
 
   return (
     <form className={styles.modal_body}>
-      <h2 className={styles.input_menu}></h2>
+      <CloseIcon
+        style={{ cursor: "pointer" }}
+        className={styles.task_close_icon}
+        onClick={() => props.handleOnClose()}
+      />
       <div>
         <h4 className={styles.input_title}>タイトル</h4>
         <textarea
@@ -145,7 +153,7 @@ export const TaskBody: React.FC<Props> = (props) => {
           type="button"
           onClick={handleOnDelete}
         >
-          このタスクを削除する
+          タスクを削除する
         </button>
       )}
     </form>
