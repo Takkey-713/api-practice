@@ -8,32 +8,33 @@ import { FormModal } from "./FormModal";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./style/boardModal.module.css";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import CloseIcon from "@material-ui/icons/Close";
 
 const forPcStyles = {
   overlay: {
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(0,0,0,.64)",
   },
   content: {
-    top: "10%",
-    left: "30%",
-    right: "50%",
-    height: "75vh",
-    width: "20vw",
-    padding: "2vw 10vw",
+    top: "10vh",
+    left: "30vw",
+    right: "30vw",
+    height: "80vh",
+    width: "40vw",
+    padding: "10px",
   },
 };
 
 const forMobileStyles = {
   overlay: {
-    backgroundColor: "transparent",
+    backgroundColor: "rgba(0,0,0,.64)",
   },
   content: {
-    top: "10%",
-    left: "30%",
-    right: "50%",
-    height: "75vh",
-    width: "20vw",
-    padding: "2vw 10vw",
+    top: "5vh",
+    left: "5vw",
+    right: "5vw",
+    height: "90vh",
+    width: "90vw",
+    padding: "0",
   },
 };
 // モバイル用に変更する
@@ -105,6 +106,11 @@ export const BoardModal: React.FC<Props> = (props) => {
           style={forPcStyles}
         >
           <div className={styles.modal_body}>
+            <CloseIcon
+              style={{ cursor: "pointer" }}
+              className={styles.task_close_icon}
+              onClick={() => props.handleOnBoardModalClose()}
+            />
             <div className={styles.board_title}>{props.board.name}</div>
             <div className={styles.task_lists}>
               {props.tasks &&
@@ -153,7 +159,7 @@ export const BoardModal: React.FC<Props> = (props) => {
                 type="button"
                 onClick={handleOnDeleteBoard}
               >
-                このリストを削除する
+                リストを削除する
               </button>
             </div>
           </div>
@@ -167,6 +173,11 @@ export const BoardModal: React.FC<Props> = (props) => {
           style={forMobileStyles}
         >
           <div className={styles.modal_body}>
+            <CloseIcon
+              style={{ cursor: "pointer" }}
+              className={styles.task_close_icon}
+              onClick={() => props.handleOnBoardModalClose()}
+            />
             <div className={styles.board_title}>{props.board.name}</div>
             <div className={styles.task_lists}>
               {props.tasks &&
@@ -215,7 +226,7 @@ export const BoardModal: React.FC<Props> = (props) => {
                 type="button"
                 onClick={handleOnDeleteBoard}
               >
-                このリストを削除する
+                リストを削除する
               </button>
             </div>
           </div>

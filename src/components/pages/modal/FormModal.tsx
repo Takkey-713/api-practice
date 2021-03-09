@@ -9,12 +9,12 @@ const forPcStyles = {
     backgroundColor: "rgba(0,0,0,.64)",
   },
   content: {
-    top: "10%",
-    left: "30%",
-    right: "50%",
-    height: "75vh",
-    width: "20vw",
-    padding: "2vw 10vw",
+    top: "10vh",
+    left: "30vw",
+    right: "30vw",
+    height: "80vh",
+    width: "40vw",
+    padding: "10px",
   },
 };
 
@@ -26,8 +26,9 @@ const forMobileStyles = {
     top: "5vh",
     left: "5vw",
     right: "5vw",
-    height: "85vh",
-    width: "80vw",
+    height: "90vh",
+    width: "90vw",
+    padding: "0",
   },
 };
 

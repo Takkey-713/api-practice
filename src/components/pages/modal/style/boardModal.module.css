@@ -5,6 +5,18 @@
   align-items: center;
 }
 
+@media screen and (max-width: 575px) {
+  .task_close_icon {
+    margin: 10px 0 0 300px;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .task_close_icon {
+    margin: 0 0 0 520px;
+  }
+}
+
 .board_title {
   font-size: 20px;
 }
@@ -40,14 +52,16 @@
 }
 
 .add_task_btn {
-  width: 135px;
+  color: white;
   font-size: 12px;
-  margin-top: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 3px rgb(169, 206, 236);
+  margin-top: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 3px #29477a;
+  padding: 8px 8px;
   cursor: pointer;
   border-style: none;
   outline: none;
+  background-color: rgb(66, 163, 247);
 }
 
 .add_task_btn:active {
@@ -57,15 +71,16 @@
 }
 
 .board_delete_btn {
-  width: 135px;
-  margin-top: 20px;
-  border-radius: 5px;
+  color: white;
+  margin-top: 30px;
+  border-radius: 10px;
   cursor: pointer;
   border-style: none;
   outline: none;
   font-size: 12px;
-  color: rgb(196, 82, 53);
-  box-shadow: 0px 3px rgb(196, 82, 53);
+  background-color: rgb(196, 82, 53);
+  box-shadow: 0px 3px#29477a;
+  padding: 8px 8px;
 }
 
 .board_delete_btn:active {
